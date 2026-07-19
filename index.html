@@ -4275,9 +4275,10 @@
         <h3>Newsletter</h3>
         <p>Consejos de crianza, novedades del centro y fechas importantes.</p>
 
-        <form class="newsletter" action="mailto:escuelainfantilbajoelmar@hotmail.com" method="post"
-          enctype="text/plain">
-          <input type="email" name="email" placeholder="Tu email" aria-label="Email newsletter">
+        <form class="newsletter" action="https://formsubmit.co/escuelainfantilbajoelmar@hotmail.com" method="post">
+          <input type="hidden" name="_subject" value="Suscripción Newsletter - Bajo el Mar">
+          <input type="hidden" name="_captcha" value="false">
+          <input type="email" name="email" placeholder="Tu email" aria-label="Email newsletter" required>
           <button class="btn btn-primary" type="submit">Enviar</button>
         </form>
       </div>

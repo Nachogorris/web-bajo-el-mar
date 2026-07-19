@@ -313,12 +313,57 @@ if("IntersectionObserver" in window){
   revealItems.forEach(item => item.classList.add("visible"));
 }
 
-// ---------- Formularios estáticos ----------
-document.querySelectorAll("[data-static-form]").forEach(form => {
-  form.addEventListener("submit", () => {
-    const btn = form.querySelector("button[type='submit']");
-    if(btn){
-      btn.textContent = "Abriendo tu correo...";
-    }
+// ---------- Procesamiento de Formularios con FormSubmit + Mensaje de Éxito ----------
+document.addEventListener("DOMContentLoaded", () => {
+  document.querySelectorAll("form").forEach(form => {
+    const action = form.getAttribute("action");
+    if (!action || !action.includes("formsubmit.co")) return;
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const submitBtn = form.querySelector("button[type='submit']");
+      const originalBtnText = submitBtn ? submitBtn.innerHTML : "Enviar";
+
+      if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = "Enviando...";
+      }
+
+      let ajaxAction = action;
+      if (action.includes("formsubmit.co/") && !action.includes("formsubmit.co/ajax/")) {
+        ajaxAction = action.replace("formsubmit.co/", "formsubmit.co/ajax/");
+      }
+
+      try {
+        const formData = new FormData(form);
+        const response = await fetch(ajaxAction, {
+          method: "POST",
+          headers: {
+            'Accept': 'application/json'
+          },
+          body: formData
+        });
+
+        if (response.ok) {
+          const isNewsletter = form.classList.contains("newsletter");
+          form.innerHTML = `
+            <div class="form-success-msg" style="padding: ${isNewsletter ? '1.2rem' : '2.5rem'}; text-align: center; background: rgba(20, 184, 166, 0.08); border: 1px solid rgba(20, 184, 166, 0.25); border-radius: 20px; width: 100%;">
+              <div style="font-size: ${isNewsletter ? '1.8rem' : '2.8rem'}; margin-bottom: 0.3rem;">🎉</div>
+              <h3 style="font-family: 'Fraunces', Georgia, serif; color: var(--deep); margin-bottom: 0.4rem; font-size: ${isNewsletter ? '1.1rem' : '1.5rem'};">¡Mensaje enviado con éxito!</h3>
+              <p style="color: var(--muted); font-size: ${isNewsletter ? '0.85rem' : '0.95rem'}; margin: 0; line-height: 1.5;">${isNewsletter ? 'Te has suscrito correctamente a nuestra lista de correo.' : 'Hemos recibido tu solicitud. Nos pondremos en contacto contigo a la mayor brevedad posible.'}</p>
+            </div>
+          `;
+        } else {
+          throw new Error("Respuesta no OK");
+        }
+      } catch (err) {
+        console.error("Error enviando formulario:", err);
+        if (submitBtn) {
+          submitBtn.disabled = false;
+          submitBtn.innerHTML = originalBtnText;
+        }
+        alert("Hubo un problema al enviar el mensaje. Por favor inténtalo de nuevo o contáctanos directamente por teléfono/WhatsApp.");
+      }
+    });
   });
 });
