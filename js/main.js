@@ -177,27 +177,20 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  let ticking = false;
-
   const updateHero = () => {
-    ticking = false;
+    const rect = hero.getBoundingClientRect();
+    // Optimización: si el hero no está en pantalla, no hacemos nada para consumir 0% CPU/GPU.
+    if (rect.bottom < 0) return;
 
     const isMobile = window.innerWidth <= 768;
-    const rect = hero.getBoundingClientRect();
     const scrollableDistance = Math.max(hero.offsetHeight - window.innerHeight, 1);
     
     let rawProgress = clamp(-rect.top / scrollableDistance);
     const progress = isMobile ? (0.7 + rawProgress * 0.3) : rawProgress;
 
-    /*
-      Secuencia creativa:
-      0.00 - 0.06  puerta cerrada; nacen los peces SVG sobre los peces reales de la puerta.
-      0.06 - 0.62  la puerta se abre completamente hacia los lados a ritmo constante.
-      0.18 - 0.42  los peces entran por la apertura.
-      0.36 - 0.72  los peces se reparten por el mundo submarino.
-      0.38 - 0.70  la bienvenida permanece y flota hacia arriba.
-      0.64 - 0.90  aparece el mensaje comercial y CTAs de forma limpia.
-    */
+    // Tiempo real en segundos para animar de forma constante y fluida
+    const time = performance.now() * 0.001;
+
     const fishReveal = prefersReducedMotion ? 1 : smoothStep(0.006, 0.060, progress);
     const doorProgress = prefersReducedMotion ? 1 : clamp((progress - 0.055) / 0.56);
     const worldProgress = prefersReducedMotion ? 1 : smoothStep(0.11, 0.50, progress);
@@ -231,7 +224,6 @@ document.addEventListener("DOMContentLoaded", () => {
       }
 
       if (heroIntro) {
-        // La bienvenida permanece visible, pero queda más baja y compacta para no chocar con el header.
         const introY = -50 - introLift * 18;
         const introScale = 1 - introLift * 0.20;
         heroIntro.style.opacity = String(introFade.toFixed(3));
@@ -260,7 +252,6 @@ document.addEventListener("DOMContentLoaded", () => {
       const spreadProgress = easeInOut((progress - (0.38 + delay * 0.55)) / 0.38);
       const lateFade = 1 - smoothStep(0.97, 1.00, progress);
 
-      // Al principio el pez acompaña a la hoja, después se suelta hacia la apertura.
       const doorFollowX = sideDirection * translateAmount * doorProgress * (1 - entryProgress);
       const onDoorX = fromX + doorFollowX;
       const onDoorY = fromY;
@@ -268,23 +259,21 @@ document.addEventListener("DOMContentLoaded", () => {
       const throughDoorX = lerp(onDoorX, entryX, entryProgress);
       const throughDoorY = lerp(onDoorY, entryY, entryProgress);
 
-      // Movimiento orgánico ultra suave y breve (dampened)
-      const freqX = isMobile ? 0.3 : 1.2;
-      const freqY = isMobile ? 0.2 : 0.9;
-      const ampX = isMobile ? 0.03 : 0.18;
-      const ampY = isMobile ? 0.02 : 0.14;
+      // Movimiento de flotación basado en tiempo: constante, lento y fluido
+      const floatTime = time * (isMobile ? 0.38 : 0.65);
+      const ampX = isMobile ? 0.42 : 1.1;
+      const ampY = isMobile ? 0.32 : 0.85;
 
-      const floatX = Math.sin((progress * freqX + delay * 41) * Math.PI) * (0.15 + spreadProgress * ampX);
-      const floatY = Math.cos((progress * freqY + delay * 31) * Math.PI) * (0.15 + spreadProgress * ampY);
+      const floatX = Math.sin(floatTime + delay * 19) * ampX;
+      const floatY = Math.cos(floatTime * 0.85 + delay * 23) * ampY;
 
-      // Los peces viajan una distancia mucho más corta y despacio
-      const travelDamp = isMobile ? 0.15 : 0.35;
+      // El scroll solo desplaza el pez una distancia muy corta y despacio
+      const travelDamp = isMobile ? 0.08 : 0.30;
       const x = lerp(throughDoorX, endX, spreadProgress * travelDamp) + floatX;
       const y = lerp(throughDoorY, endY, spreadProgress * travelDamp) + floatY;
 
-      const fishAngleFreq = isMobile ? 0.2 : 0.8;
-      const angleAmp = isMobile ? 0.15 : 0.6;
-      const angle = lerp(lerp(rot * 0.15, rot + sideDirection * -4, entryProgress), endRot, spreadProgress * travelDamp) + Math.sin(progress * fishAngleFreq + delay * 9) * angleAmp * spreadProgress;
+      // Rotación suave a lo largo del tiempo
+      const angle = lerp(lerp(rot * 0.15, rot + sideDirection * -4, entryProgress), endRot, spreadProgress * travelDamp) + Math.sin(time * (isMobile ? 0.4 : 1.1) + delay * 7) * (isMobile ? 1.1 : 2.2) * spreadProgress;
       const fishScale = lerp(scale * (0.72 + entryProgress * 0.24), endScale, spreadProgress * travelDamp);
       const opacity = clamp(fishReveal * lateFade * (0.58 + entryProgress * 0.20 + spreadProgress * 0.22));
 
@@ -293,16 +282,15 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   };
 
-  const requestUpdate = () => {
-    if (ticking) return;
-    ticking = true;
-    requestAnimationFrame(updateHero);
+  // Bucle de animación continuo y optimizado
+  const tick = () => {
+    updateHero();
+    requestAnimationFrame(tick);
   };
+  tick();
 
-  updateHero();
-  window.addEventListener("scroll", requestUpdate, { passive: true });
-  window.addEventListener("resize", requestUpdate);
-  window.addEventListener("load", requestUpdate);
+  window.addEventListener("resize", () => updateHero());
+  window.addEventListener("load", () => updateHero());
 });
 
 // ---------- Aparición suave de elementos ----------
