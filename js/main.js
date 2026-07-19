@@ -185,15 +185,17 @@ document.addEventListener("DOMContentLoaded", () => {
     const isMobile = window.innerWidth <= 768;
     
     let progress;
+    let rawProgress = 0;
     if (isMobile) {
       // En móvil, mapeamos el progreso a lo largo de un rango cómodo de 320px de scroll.
       const mobileScrollRange = 320;
       let scrollOffset = -rect.top; // Píxeles reales de scroll del hero
-      let rawProgress = clamp(scrollOffset / mobileScrollRange);
+      rawProgress = clamp(scrollOffset / mobileScrollRange);
       progress = 0.65 + rawProgress * 0.32; // Rango suave de 0.65 a 0.97
     } else {
       const scrollableDistance = Math.max(hero.offsetHeight - window.innerHeight, 1);
-      progress = clamp(-rect.top / scrollableDistance);
+      rawProgress = clamp(-rect.top / scrollableDistance);
+      progress = rawProgress;
     }
 
     // Tiempo real en segundos para animar de forma constante y fluida
