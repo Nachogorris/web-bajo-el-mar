@@ -609,7 +609,7 @@
 
 <style id="belm-final-overrides">
   /* Ajuste final: placa temática, peces tipo puerta y secuencia limpia */
-  .home-gate-hero { min-height: 145vh; }
+  .home-gate-hero { height: 120vh !important; min-height: auto !important; }
 
   .door-panel { box-shadow: 0 28px 90px rgba(0, 30, 54, .28); }
   .door-opening-glow {
@@ -726,7 +726,8 @@
 
   @media (max-width: 768px) {
     .home-gate-hero {
-      min-height: 105vh !important;
+      height: 102vh !important;
+      min-height: auto !important;
     }
     .hero-intro {
       display: none !important;
