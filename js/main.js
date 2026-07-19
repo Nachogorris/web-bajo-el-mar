@@ -210,35 +210,37 @@ document.addEventListener("DOMContentLoaded", () => {
     const translateAmount = isMobile ? 25 : 22;
     const rotateAmount = isMobile ? 58 : 64;
 
-    leftDoor.style.transform = `
-      perspective(1400px)
-      translateX(${-translateAmount * doorProgress}vw)
-      rotateY(${-rotateAmount * doorProgress}deg)
-    `;
+    if (!isMobile) {
+      leftDoor.style.transform = `
+        perspective(1400px)
+        translateX(${-translateAmount * doorProgress}vw)
+        rotateY(${-rotateAmount * doorProgress}deg)
+      `;
 
-    rightDoor.style.transform = `
-      perspective(1400px)
-      translateX(${translateAmount * doorProgress}vw)
-      rotateY(${rotateAmount * doorProgress}deg)
-    `;
+      rightDoor.style.transform = `
+        perspective(1400px)
+        translateX(${translateAmount * doorProgress}vw)
+        rotateY(${rotateAmount * doorProgress}deg)
+      `;
+
+      if (doorShadow) doorShadow.style.opacity = String(clamp(0.38 - doorProgress * 0.36).toFixed(3));
+
+      if (doorGlow) {
+        doorGlow.style.opacity = String(glowProgress.toFixed(3));
+        doorGlow.style.transform = `translate(-50%, -50%) scale(${(0.78 + doorProgress * 0.34).toFixed(3)})`;
+      }
+
+      if (heroIntro) {
+        // La bienvenida permanece visible, pero queda más baja y compacta para no chocar con el header.
+        const introY = -50 - introLift * 18;
+        const introScale = 1 - introLift * 0.20;
+        heroIntro.style.opacity = String(introFade.toFixed(3));
+        heroIntro.style.transform = `translate(-50%, ${introY.toFixed(2)}%) translateY(${-introLift * 4.5}vh) scale(${introScale.toFixed(3)})`;
+      }
+    }
 
     underwaterWorld.style.opacity = String(worldProgress.toFixed(3));
     underwaterWorld.style.transform = `scale(${(1.025 + doorProgress * 0.055).toFixed(3)})`;
-
-    if (doorShadow) doorShadow.style.opacity = String(clamp(0.38 - doorProgress * 0.36).toFixed(3));
-
-    if (doorGlow) {
-      doorGlow.style.opacity = String(glowProgress.toFixed(3));
-      doorGlow.style.transform = `translate(-50%, -50%) scale(${(0.78 + doorProgress * 0.34).toFixed(3)})`;
-    }
-
-    if (heroIntro) {
-      // La bienvenida permanece visible, pero queda más baja y compacta para no chocar con el header.
-      const introY = -50 - introLift * 18;
-      const introScale = 1 - introLift * 0.20;
-      heroIntro.style.opacity = String(introFade.toFixed(3));
-      heroIntro.style.transform = `translate(-50%, ${introY.toFixed(2)}%) translateY(${-introLift * 4.5}vh) scale(${introScale.toFixed(3)})`;
-    }
 
     if (heroContent) {
       heroContent.style.opacity = String(contentProgress.toFixed(3));
@@ -266,13 +268,20 @@ document.addEventListener("DOMContentLoaded", () => {
       const throughDoorX = lerp(onDoorX, entryX, entryProgress);
       const throughDoorY = lerp(onDoorY, entryY, entryProgress);
 
-      // Movimiento orgánico una vez dentro, con destinos separados para evitar la bola central.
-      const floatX = Math.sin((progress * 13 + delay * 41) * Math.PI) * (0.55 + spreadProgress * 1.35);
-      const floatY = Math.cos((progress * 11 + delay * 31) * Math.PI) * (0.45 + spreadProgress * 1.15);
+      // Movimiento orgánico muy suave y breve (dampened)
+      const freqX = isMobile ? 0.6 : 2.5;
+      const freqY = isMobile ? 0.5 : 2.0;
+      const ampX = isMobile ? 0.08 : 0.45;
+      const ampY = isMobile ? 0.06 : 0.35;
+
+      const floatX = Math.sin((progress * freqX + delay * 41) * Math.PI) * (0.2 + spreadProgress * ampX);
+      const floatY = Math.cos((progress * freqY + delay * 31) * Math.PI) * (0.2 + spreadProgress * ampY);
 
       const x = lerp(throughDoorX, endX, spreadProgress) + floatX;
       const y = lerp(throughDoorY, endY, spreadProgress) + floatY;
-      const angle = lerp(lerp(rot * 0.15, rot + sideDirection * -4, entryProgress), endRot, spreadProgress) + Math.sin(progress * 7 + delay * 9) * 2.2 * spreadProgress;
+
+      const fishAngleFreq = isMobile ? 0.4 : 2.0;
+      const angle = lerp(lerp(rot * 0.15, rot + sideDirection * -4, entryProgress), endRot, spreadProgress) + Math.sin(progress * fishAngleFreq + delay * 9) * (isMobile ? 0.4 : 1.8) * spreadProgress;
       const fishScale = lerp(scale * (0.72 + entryProgress * 0.24), endScale, spreadProgress);
       const opacity = clamp(fishReveal * lateFade * (0.58 + entryProgress * 0.20 + spreadProgress * 0.22));
 
