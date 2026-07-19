@@ -183,10 +183,18 @@ document.addEventListener("DOMContentLoaded", () => {
     if (rect.bottom < 0) return;
 
     const isMobile = window.innerWidth <= 768;
-    const scrollableDistance = Math.max(hero.offsetHeight - window.innerHeight, 1);
     
-    let rawProgress = clamp(-rect.top / scrollableDistance);
-    const progress = isMobile ? (0.7 + rawProgress * 0.3) : rawProgress;
+    let progress;
+    if (isMobile) {
+      // En móvil, mapeamos el progreso a lo largo de un rango cómodo de 320px de scroll.
+      const mobileScrollRange = 320;
+      let scrollOffset = -rect.top; // Píxeles reales de scroll del hero
+      let rawProgress = clamp(scrollOffset / mobileScrollRange);
+      progress = 0.65 + rawProgress * 0.32; // Rango suave de 0.65 a 0.97
+    } else {
+      const scrollableDistance = Math.max(hero.offsetHeight - window.innerHeight, 1);
+      progress = clamp(-rect.top / scrollableDistance);
+    }
 
     // Tiempo real en segundos para animar de forma constante y fluida
     const time = performance.now() * 0.001;
@@ -250,7 +258,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const sideDirection = side === "left" ? -1 : 1;
       const entryProgress = easeInOut((progress - (0.145 + delay)) / 0.27);
       const spreadProgress = easeInOut((progress - (0.38 + delay * 0.55)) / 0.38);
-      const lateFade = 1 - smoothStep(0.97, 1.00, progress);
+      const lateFade = isMobile ? (1 - smoothStep(0.82, 0.96, progress)) : (1 - smoothStep(0.97, 1.00, progress));
 
       const doorFollowX = sideDirection * translateAmount * doorProgress * (1 - entryProgress);
       const onDoorX = fromX + doorFollowX;
@@ -267,8 +275,8 @@ document.addEventListener("DOMContentLoaded", () => {
       const floatX = Math.sin(floatTime + delay * 19) * ampX;
       const floatY = Math.cos(floatTime * 0.85 + delay * 23) * ampY;
 
-      // El scroll solo desplaza el pez una distancia muy corta y despacio
-      const travelDamp = isMobile ? 0.08 : 0.30;
+      // El scroll desplaza el pez despacio y en rango corto
+      const travelDamp = isMobile ? 0.22 : 0.30;
       const x = lerp(throughDoorX, endX, spreadProgress * travelDamp) + floatX;
       const y = lerp(throughDoorY, endY, spreadProgress * travelDamp) + floatY;
 
