@@ -92,6 +92,10 @@ document.addEventListener("DOMContentLoaded", () => {
     savedScrollBehavior = null;
   };
 
+  const requestUpdate = () => {
+    updateHero();
+  };
+
   const scrollHeroToFinalScene = () => {
     const startY = window.scrollY || window.pageYOffset || 0;
     const heroTop = hero.getBoundingClientRect().top + startY;
@@ -259,27 +263,7 @@ document.addEventListener("DOMContentLoaded", () => {
     doorFishes.forEach(({ el, side, fromX, fromY, entryX, entryY, endX, endY, rot, endRot, scale, endScale, delay }) => {
       const sideDirection = side === "left" ? -1 : 1;
       
-      let entryProgress, spreadProgress, lateFade, travelDamp;
-
-      if (isMobile) {
-        // En móvil: movimiento lineal y directo sin saltos ni retrasos
-        entryProgress = 1.0; // Ya han entrado
-        spreadProgress = rawProgress; // Progreso de 0.0 a 1.0 totalmente acoplado al scroll manual
-        lateFade = 1 - smoothStep(0.78, 0.95, rawProgress); // Desaparecen gradualmente al final del scroll
-        travelDamp = 0.28; // Rango de movimiento corto
-      } else {
-        entryProgress = easeInOut((progress - (0.145 + delay)) / 0.27);
-        spreadProgress = easeInOut((progress - (0.38 + delay * 0.55)) / 0.38);
-        lateFade = 1 - smoothStep(0.97, 1.00, progress);
-        travelDamp = 0.30;
-      }
-
-      const doorFollowX = sideDirection * translateAmount * doorProgress * (1 - entryProgress);
-      const onDoorX = fromX + doorFollowX;
-      const onDoorY = fromY;
-
-      const throughDoorX = lerp(onDoorX, entryX, entryProgress);
-      const throughDoorY = lerp(onDoorY, entryY, entryProgress);
+      let x, y, angle, fishScale, lateFade;
 
       // Movimiento de flotación basado en tiempo: constante, lento y fluido
       const floatTime = time * (isMobile ? 0.38 : 0.65);
@@ -289,13 +273,44 @@ document.addEventListener("DOMContentLoaded", () => {
       const floatX = Math.sin(floatTime + delay * 19) * ampX;
       const floatY = Math.cos(floatTime * 0.85 + delay * 23) * ampY;
 
-      const x = lerp(throughDoorX, endX, spreadProgress * travelDamp) + floatX;
-      const y = lerp(throughDoorY, endY, spreadProgress * travelDamp) + floatY;
+      if (isMobile) {
+        // En móvil: empezamos con los peces ya separados horizontalmente (basados en endX)
+        // y bastante más arriba verticalmente (endY - 24vh)
+        const startX = endX;
+        const startY = endY - 24;
+        
+        // Con el scroll, se mueven despacio hacia abajo y hacia los lados exteriores
+        const targetX = endX + sideDirection * 7;
+        const targetY = endY + 2;
 
-      // Rotación suave a lo largo del tiempo
-      const angle = lerp(lerp(rot * 0.15, rot + sideDirection * -4, entryProgress), endRot, spreadProgress * travelDamp) + Math.sin(time * (isMobile ? 0.4 : 1.1) + delay * 7) * (isMobile ? 1.1 : 2.2) * spreadProgress;
-      const fishScale = lerp(scale * (0.72 + entryProgress * 0.24), endScale, spreadProgress * travelDamp);
-      const opacity = clamp(fishReveal * lateFade * (0.58 + entryProgress * 0.20 + spreadProgress * 0.22));
+        x = lerp(startX, targetX, rawProgress) + floatX;
+        y = lerp(startY, targetY, rawProgress) + floatY;
+
+        angle = lerp(endRot - sideDirection * 6, endRot, rawProgress) + Math.sin(time * 0.4 + delay * 7) * 1.2;
+        fishScale = lerp(scale * 0.82, endScale, rawProgress);
+        lateFade = 1 - smoothStep(0.78, 0.95, rawProgress);
+      } else {
+        // En PC: lógica original del Hero de puerta
+        const entryProgress = easeInOut((progress - (0.145 + delay)) / 0.27);
+        const spreadProgress = easeInOut((progress - (0.38 + delay * 0.55)) / 0.38);
+        lateFade = 1 - smoothStep(0.97, 1.00, progress);
+        const travelDamp = 0.30;
+
+        const doorFollowX = sideDirection * translateAmount * doorProgress * (1 - entryProgress);
+        const onDoorX = fromX + doorFollowX;
+        const onDoorY = fromY;
+
+        const throughDoorX = lerp(onDoorX, entryX, entryProgress);
+        const throughDoorY = lerp(onDoorY, entryY, entryProgress);
+
+        x = lerp(throughDoorX, endX, spreadProgress * travelDamp) + floatX;
+        y = lerp(throughDoorY, endY, spreadProgress * travelDamp) + floatY;
+
+        angle = lerp(lerp(rot * 0.15, rot + sideDirection * -4, entryProgress), endRot, spreadProgress * travelDamp) + Math.sin(time * 1.1 + delay * 7) * 2.2 * spreadProgress;
+        fishScale = lerp(scale * (0.72 + entryProgress * 0.24), endScale, spreadProgress * travelDamp);
+      }
+
+      const opacity = clamp(fishReveal * lateFade * (isMobile ? 0.78 : (0.58 + entryProgress * 0.20 + spreadProgress * 0.22)));
 
       el.style.opacity = String(opacity.toFixed(3));
       el.style.transform = `translate(-50%, -50%) translate3d(${x.toFixed(2)}vw, ${y.toFixed(2)}vh, 0) rotate(${angle.toFixed(2)}deg) scale(${fishScale.toFixed(3)})`;
