@@ -263,7 +263,7 @@ document.addEventListener("DOMContentLoaded", () => {
     doorFishes.forEach(({ el, side, fromX, fromY, entryX, entryY, endX, endY, rot, endRot, scale, endScale, delay }) => {
       const sideDirection = side === "left" ? -1 : 1;
       
-      let x, y, angle, fishScale, lateFade;
+      let x, y, angle, fishScale, lateFade, entryProgress, spreadProgress;
 
       // Movimiento de flotación basado en tiempo: constante, lento y fluido
       const floatTime = time * (isMobile ? 0.38 : 0.65);
@@ -289,10 +289,12 @@ document.addEventListener("DOMContentLoaded", () => {
         angle = lerp(endRot - sideDirection * 6, endRot, rawProgress) + Math.sin(time * 0.4 + delay * 7) * 1.2;
         fishScale = lerp(scale * 0.82, endScale, rawProgress);
         lateFade = 1 - smoothStep(0.78, 0.95, rawProgress);
+        entryProgress = 1.0;
+        spreadProgress = rawProgress;
       } else {
         // En PC: lógica original del Hero de puerta
-        const entryProgress = easeInOut((progress - (0.145 + delay)) / 0.27);
-        const spreadProgress = easeInOut((progress - (0.38 + delay * 0.55)) / 0.38);
+        entryProgress = easeInOut((progress - (0.145 + delay)) / 0.27);
+        spreadProgress = easeInOut((progress - (0.38 + delay * 0.55)) / 0.38);
         lateFade = 1 - smoothStep(0.97, 1.00, progress);
         const travelDamp = 0.30;
 
