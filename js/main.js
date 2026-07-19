@@ -256,9 +256,21 @@ document.addEventListener("DOMContentLoaded", () => {
 
     doorFishes.forEach(({ el, side, fromX, fromY, entryX, entryY, endX, endY, rot, endRot, scale, endScale, delay }) => {
       const sideDirection = side === "left" ? -1 : 1;
-      const entryProgress = easeInOut((progress - (0.145 + delay)) / 0.27);
-      const spreadProgress = easeInOut((progress - (0.38 + delay * 0.55)) / 0.38);
-      const lateFade = isMobile ? (1 - smoothStep(0.82, 0.96, progress)) : (1 - smoothStep(0.97, 1.00, progress));
+      
+      let entryProgress, spreadProgress, lateFade, travelDamp;
+
+      if (isMobile) {
+        // En móvil: movimiento lineal y directo sin saltos ni retrasos
+        entryProgress = 1.0; // Ya han entrado
+        spreadProgress = rawProgress; // Progreso de 0.0 a 1.0 totalmente acoplado al scroll manual
+        lateFade = 1 - smoothStep(0.78, 0.95, rawProgress); // Desaparecen gradualmente al final del scroll
+        travelDamp = 0.28; // Rango de movimiento corto
+      } else {
+        entryProgress = easeInOut((progress - (0.145 + delay)) / 0.27);
+        spreadProgress = easeInOut((progress - (0.38 + delay * 0.55)) / 0.38);
+        lateFade = 1 - smoothStep(0.97, 1.00, progress);
+        travelDamp = 0.30;
+      }
 
       const doorFollowX = sideDirection * translateAmount * doorProgress * (1 - entryProgress);
       const onDoorX = fromX + doorFollowX;
@@ -275,8 +287,6 @@ document.addEventListener("DOMContentLoaded", () => {
       const floatX = Math.sin(floatTime + delay * 19) * ampX;
       const floatY = Math.cos(floatTime * 0.85 + delay * 23) * ampY;
 
-      // El scroll desplaza el pez despacio y en rango corto
-      const travelDamp = isMobile ? 0.22 : 0.30;
       const x = lerp(throughDoorX, endX, spreadProgress * travelDamp) + floatX;
       const y = lerp(throughDoorY, endY, spreadProgress * travelDamp) + floatY;
 
