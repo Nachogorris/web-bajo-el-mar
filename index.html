@@ -3436,9 +3436,9 @@
 <style id="belm-age-copy-above-visual">
 
 /* =========================================================
-   Ajuste final solicitado - Aulas por edad
-   La caja blanca de texto queda arriba y el bloque visual azul debajo,
-   manteniendo el hilo de etapas entre los tres niveles.
+   Aulas por edad:
+   - En PC (>= 981px): La caja de texto va arriba y el visual abajo.
+   - En Móvil (<= 980px): El título visual va ARRIBA y el texto blanco ABAJO.
    ========================================================= */
 .age-section-premium .age-journey {
   padding-top: clamp(1.2rem, 2.4vw, 2rem) !important;
@@ -3450,48 +3450,48 @@
   overflow: visible !important;
 }
 
-.age-section-premium .age-stage-copy {
-  order: 1 !important;
-  z-index: 7 !important;
-  margin: 0 clamp(.7rem, 1.2vw, 1rem) -1.15rem !important;
-  padding: clamp(1.15rem, 1.7vw, 1.45rem) clamp(1rem, 1.8vw, 1.45rem) clamp(1.15rem, 1.7vw, 1.35rem) !important;
-  min-height: 218px !important;
-  border-radius: 28px !important;
-  background: rgba(255,255,255,.92) !important;
-  box-shadow: 0 24px 62px rgba(4,61,93,.13) !important;
-}
-
-.age-section-premium .age-stage-visual {
-  order: 2 !important;
-  z-index: 2 !important;
-  min-height: 150px !important;
-  padding: 1rem 1.25rem !important;
-  border-radius: 28px 28px 46px 46px !important;
-}
-
-.age-section-premium .age-stage-title-top {
-  top: auto !important;
-  bottom: 0.85rem !important;
-  left: 1rem !important;
-  right: 1rem !important;
-  max-width: 85% !important;
-  font-size: clamp(1.2rem, 1.8vw, 1.45rem) !important;
-}
-
-.age-section-premium .age-stage-label {
-  top: 0.8rem !important;
-  bottom: auto !important;
-  left: 1rem !important;
-}
-
-.age-section-premium .age-stage-number {
-  top: 0.5rem !important;
-  right: 1rem !important;
-  font-size: clamp(3rem, 5vw, 4.2rem) !important;
-  opacity: .15 !important;
-}
-
 @media (min-width: 981px) {
+  .age-section-premium .age-stage-copy {
+    order: 1 !important;
+    z-index: 7 !important;
+    margin: 0 clamp(.7rem, 1.2vw, 1rem) -1.15rem !important;
+    padding: clamp(1.15rem, 1.7vw, 1.45rem) clamp(1rem, 1.8vw, 1.45rem) clamp(1.15rem, 1.7vw, 1.35rem) !important;
+    min-height: 218px !important;
+    border-radius: 28px !important;
+    background: rgba(255,255,255,.92) !important;
+    box-shadow: 0 24px 62px rgba(4,61,93,.13) !important;
+  }
+
+  .age-section-premium .age-stage-visual {
+    order: 2 !important;
+    z-index: 2 !important;
+    min-height: 150px !important;
+    padding: 1rem 1.25rem !important;
+    border-radius: 28px 28px 46px 46px !important;
+  }
+
+  .age-section-premium .age-stage-title-top {
+    top: auto !important;
+    bottom: 0.85rem !important;
+    left: 1rem !important;
+    right: 1rem !important;
+    max-width: 85% !important;
+    font-size: clamp(1.2rem, 1.8vw, 1.45rem) !important;
+  }
+
+  .age-section-premium .age-stage-label {
+    top: 0.8rem !important;
+    bottom: auto !important;
+    left: 1rem !important;
+  }
+
+  .age-section-premium .age-stage-number {
+    top: 0.5rem !important;
+    right: 1rem !important;
+    font-size: clamp(3rem, 5vw, 4.2rem) !important;
+    opacity: .15 !important;
+  }
+
   .age-section-premium .age-journey::before {
     top: 21.2rem !important;
   }
@@ -3510,35 +3510,68 @@
 }
 
 @media (max-width: 980px) {
-  .age-section-premium .age-stage-copy {
-    margin: 0 .85rem -.9rem !important;
-    min-height: auto !important;
+  .age-section-premium .age-stage-visual {
+    order: 1 !important;
+    z-index: 2 !important;
+    min-height: 145px !important;
+    padding: 1.1rem 1.25rem !important;
+    border-radius: 28px 28px 18px 18px !important;
   }
 
-  .age-section-premium .age-stage-visual {
-    min-height: 140px !important;
+  .age-section-premium .age-stage-copy {
+    order: 2 !important;
+    z-index: 7 !important;
+    margin: -1.2rem .85rem 0 !important;
+    padding: 1.6rem 1.15rem 1.3rem !important;
+    border-radius: 24px !important;
+    min-height: auto !important;
+    background: rgba(255,255,255,.95) !important;
+    box-shadow: 0 16px 45px rgba(4,61,93,.10) !important;
+  }
+
+  .age-section-premium .age-stage-title-top {
+    position: absolute !important;
+    bottom: 0.85rem !important;
+    top: auto !important;
+    left: 1.1rem !important;
+    right: 1.1rem !important;
+    max-width: 85% !important;
+    font-size: clamp(1.2rem, 4vw, 1.45rem) !important;
+  }
+
+  .age-section-premium .age-stage-label {
+    top: 0.8rem !important;
+    bottom: auto !important;
+    left: 1rem !important;
+  }
+
+  .age-section-premium .age-stage-number {
+    top: 0.5rem !important;
+    right: 1rem !important;
+    font-size: clamp(3rem, 10vw, 4.2rem) !important;
+    opacity: .15 !important;
   }
 
   .age-section-premium .age-stage::before {
-    top: 8.8rem !important;
+    top: 3.5rem !important;
     z-index: 8 !important;
   }
 }
 
 @media (max-width: 620px) {
   .age-section-premium .age-stage-copy {
-    margin: 0 .5rem -.7rem !important;
-    padding: 1.05rem .95rem 1.1rem !important;
-    border-radius: 24px !important;
+    margin: -1.2rem .5rem 0 !important;
+    padding: 1.5rem .95rem 1.2rem !important;
+    border-radius: 22px !important;
   }
 
   .age-section-premium .age-stage-visual {
-    min-height: 130px !important;
-    border-radius: 24px 24px 34px 34px !important;
+    min-height: 135px !important;
+    border-radius: 24px 24px 16px 16px !important;
   }
 
   .age-section-premium .age-stage::before {
-    top: 8.1rem !important;
+    top: 3.2rem !important;
   }
 }
 
