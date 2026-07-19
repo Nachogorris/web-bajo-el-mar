@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <!-- SEO técnico básico -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nosotros · Escuela Infantil Bajo el Mar</title>
+  <meta name="description" content="Conoce la historia y los valores de la Escuela Infantil Bajo el Mar en Alalpardo. Más de 20 años educando con vocación a niños de 0 a 3 años.">
+  <meta name="robots" content="index, follow">
+  <meta name="theme-color" content="#043D5D">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Nosotros · Escuela Infantil Bajo el Mar">
+  <meta property="og:description" content="Conoce la historia y los valores de la Escuela Infantil Bajo el Mar en Alalpardo.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="assets/hero-puerta-bajo-el-mar.jpg">
+
+  <!-- Fuentes -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,800&family=Nunito:wght@400;600;700;800;900;1000&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css?v=10">
+
+  <!-- Datos estructurados SEO local -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ChildCare",
+    "name": "Escuela Infantil Bajo el Mar",
+    "image": "assets/hero-puerta-bajo-el-mar.jpg",
+    "telephone": "+34 620 433 427",
+    "email": "escuelainfantilbajoelmar@hotmail.com",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Calle Egidos, 7",
+      "addressLocality": "Alalpardo",
+      "addressRegion": "Madrid",
+      "postalCode": "28130",
+      "addressCountry": "ES"
+    },
+    "openingHours": "Mo-Fr 06:30-17:30"
+  }
+  </script>
+  <style>
+    /* Google Reviews Premium Styling - Nosotros Page */
+    .google-reviews-hub {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      margin-bottom: 3.5rem;
+      background: linear-gradient(135deg, rgba(20,184,166,0.05) 0%, rgba(10,107,138,0.03) 100%);
+      border: 1px solid rgba(20,184,166,0.12);
+      border-radius: 24px;
+      padding: 2rem;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+      box-shadow: 0 10px 30px rgba(4,61,93,0.03);
+    }
+    .google-reviews-hub-title {
+      font-family: "Fraunces", Georgia, serif;
+      font-size: 1.5rem;
+      color: var(--deep);
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      justify-content: center;
+    }
+    .google-rating-score {
+      font-size: 2.2rem;
+      font-weight: 1000;
+      color: var(--deep);
+      line-height: 1;
+      margin-bottom: 0.25rem;
+    }
+    .stars-row {
+      display: flex;
+      justify-content: center;
+      gap: 3px;
+      margin-bottom: 0.5rem;
+    }
+    .stars-row svg {
+      width: 20px;
+      height: 20px;
+      fill: #FFC107; /* Material Gold */
+    }
+    .google-reviews-meta {
+      font-size: 0.88rem;
+      color: var(--muted);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      justify-content: center;
+    }
+
+    /* Cards Grid */
+    .nos-test-grid-google {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+    .google-review-card {
+      background: #ffffff;
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      padding: 2rem;
+      box-shadow: 0 15px 45px rgba(4,61,93,0.05);
+      position: relative;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .google-review-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 20px 50px rgba(4,61,93,0.1);
+      border-color: rgba(20,184,166,0.3);
+    }
+    .google-review-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 1.25rem;
+    }
+    .google-reviewer-profile {
+      display: flex;
+      align-items: center;
+      gap: 0.85rem;
+    }
+    .google-avatar {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      color: #ffffff;
+      display: grid;
+      place-items: center;
+      font-weight: 800;
+      font-size: 1.1rem;
+      text-transform: uppercase;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.06);
+    }
+    .google-avatar-p { background: linear-gradient(135deg, var(--teal) 0%, var(--mid) 100%); }
+    .google-avatar-i { background: linear-gradient(135deg, var(--coral) 0%, var(--yellow) 100%); }
+    .google-avatar-a { background: linear-gradient(135deg, var(--foam) 0%, var(--teal) 100%); color: var(--deep); }
+    .google-avatar-b { background: linear-gradient(135deg, var(--mid) 0%, var(--deep) 100%); }
+    .google-avatar-y { background: linear-gradient(135deg, var(--yellow) 0%, var(--coral) 100%); color: var(--deep); }
+    .google-avatar-v { background: linear-gradient(135deg, var(--teal) 0%, var(--foam) 100%); }
+
+    .google-reviewer-info h4 {
+      font-size: 1rem;
+      font-weight: 800;
+      color: var(--deep);
+      margin: 0;
+    }
+    .google-verified-badge {
+      font-size: 0.72rem;
+      color: var(--teal);
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 0.2rem;
+      margin-top: 0.15rem;
+    }
+    .google-card-logo {
+      opacity: 0.85;
+      transition: opacity 0.2s;
+    }
+    .google-review-card:hover .google-card-logo {
+      opacity: 1;
+    }
+    .google-card-stars {
+      display: flex;
+      gap: 2px;
+      margin-bottom: 1rem;
+    }
+    .google-card-stars svg {
+      width: 15px;
+      height: 15px;
+      fill: #FFC107;
+    }
+    .google-review-text {
+      font-size: 0.94rem;
+      line-height: 1.6;
+      color: var(--deep);
+      margin: 0 0 1.5rem 0;
+      flex-grow: 1;
+      font-style: italic;
+    }
+    .google-review-date {
+      font-size: 0.76rem;
+      color: var(--muted);
+      font-weight: 600;
+    }
+
+    @media (max-width: 991px) {
+      .nos-test-grid-google {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+    @media (max-width: 767px) {
+      .nos-test-grid-google {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header global -->
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="logo" href="index.html" aria-label="Ir a la página de inicio de Bajo el Mar">
+        <img src="assets/Logo/logo_bajo_el_mar_transparent.png" alt="Escuela Infantil Bajo el Mar" class="logo-img">
+      </a>
+      <nav class="main-nav" aria-label="Navegación principal">
+        <a href="index.html">Inicio</a>
+        <a href="nosotros.html" class="active">Nosotros</a>
+        <a href="metodologia.html">Metodología</a>
+        <a href="instalaciones.html">Instalaciones</a>
+        <a href="familias.html">Familias</a>
+        <a href="contacto.html">Contacto</a>
+      </nav>
+      <div class="header-actions">
+        <a class="portal" href="familias.html#portal">Portal familias</a>
+        <a class="btn btn-primary" href="contacto.html">Solicitar información</a>
+      </div>
+      <button class="menu-toggle" aria-label="Abrir menú" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- ═══════════════════════════════════════════
+         HERO — Inmersivo con fondo marino
+         ═══════════════════════════════════════════ -->
+    <section class="nos-hero">
+      <div class="nos-hero-bg" aria-hidden="true">
+        <div class="nos-hero-gradient"></div>
+        <div class="nos-hero-bubbles">
+          <span class="nos-bubble nb-1"></span>
+          <span class="nos-bubble nb-2"></span>
+          <span class="nos-bubble nb-3"></span>
+          <span class="nos-bubble nb-4"></span>
+          <span class="nos-bubble nb-5"></span>
+        </div>
+        <div class="nos-hero-animals" aria-hidden="true">
+          <span class="nha nha-1">🐡</span>
+          <span class="nha nha-2">🐙</span>
+          <span class="nha nha-3">🐠</span>
+          <span class="nha nha-4">🐬</span>
+        </div>
+      </div>
+      <div class="container nos-hero-inner">
+        <div class="nos-hero-copy">
+          <span class="eyebrow" style="color:var(--foam)">Nosotros</span>
+          <h1 class="nos-hero-title">Una escuela<br>con <em>alma familiar</em></h1>
+          <div class="nos-hero-actions">
+            <a class="btn btn-ghost" href="#historia">Nuestra historia</a>
+            <a class="btn btn-primary" href="contacto.html">Solicitar plaza</a>
+          </div>
+        </div>
+        <div class="nos-hero-stats" aria-label="Cifras clave">
+          <div class="nos-stat reveal">
+            <strong>+20</strong>
+            <span>Años acompañando familias</span>
+          </div>
+          <div class="nos-stat reveal" style="display: flex; flex-direction: column; justify-content: center; align-items: center;">
+            <svg viewBox="0 0 24 24" style="width: clamp(48px, 6vw, 56px); height: auto; margin-bottom: 0.5rem; display: block; fill: none; stroke: var(--foam); stroke-width: 2.1; stroke-linecap: round; stroke-linejoin: round;" aria-hidden="true">
+              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+              <circle cx="9" cy="7" r="4"></circle>
+              <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+              <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+            </svg>
+            <span>Personal cualificado en continua formación</span>
+          </div>
+          <div class="nos-stat reveal">
+            <strong>0–3</strong>
+            <span>Años, la etapa más importante</span>
+          </div>
+          <div class="nos-stat reveal" style="display: flex; flex-direction: column; justify-content: center; align-items: center;">
+            <svg viewBox="0 0 100 50" class="cam-stars-logo" style="width: clamp(70px, 9vw, 90px); height: auto; margin-bottom: 0.2rem; display: block;" aria-hidden="true">
+              <defs>
+                <polygon id="star" points="0,-6 1.76,-1.85 6.27,-1.85 2.62,1.23 4.02,5.65 0,2.94 -4.02,5.65 -2.62,1.23 -6.27,-1.85 -1.76,-1.85" fill="currentColor"/>
+              </defs>
+              <g color="var(--foam)">
+                <use href="#star" x="20" y="18"/>
+                <use href="#star" x="40" y="18"/>
+                <use href="#star" x="60" y="18"/>
+                <use href="#star" x="80" y="18"/>
+                <use href="#star" x="30" y="34"/>
+                <use href="#star" x="50" y="34"/>
+                <use href="#star" x="70" y="34"/>
+              </g>
+            </svg>
+            <span>Autorizada por la CAM</span>
+          </div>
+        </div>
+      </div>
+      <div class="nos-hero-wave" aria-hidden="true">
+        <svg viewBox="0 0 1440 96" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+          <path d="M0 64L60 58.7C120 53 240 43 360 48C480 53 600 75 720 80C840 85 960 75 1080 64C1200 53 1320 43 1380 37.3L1440 32V96H1380C1320 96 1200 96 1080 96C960 96 840 96 720 96C600 96 480 96 360 96C240 96 120 96 60 96H0V64Z" fill="var(--cream)"/>
+        </svg>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════
+         HISTORIA — Texto + imagen con badge
+         ═══════════════════════════════════════════ -->
+    <section class="section" id="historia">
+      <div class="container nos-story-grid">
+        <div class="nos-story-copy reveal">
+          <span class="eyebrow">Nuestra historia</span>
+          <h2 class="title">Educación infantil<br>desde la <em>vocación</em></h2>
+          <p class="lead" style="margin-top:1.2rem">Bajo el Mar nació del sueño de tres maestras de Educación Infantil que querían crear algo diferente: una escuela pequeña, cercana y con alma, donde cada niño fuera conocido por su nombre y su carácter antes que por su número de aula.</p>
+          <p class="lead" style="margin-top:1rem">Nos instalamos en Alalpardo, un municipio tranquilo al norte de Madrid, donde el entorno favorece el ritmo pausado que necesitan los más pequeños. Trabajamos con comunicación diaria con las familias porque entendemos la escuela como una extensión real del hogar.</p>
+          <div class="nos-story-pillars">
+            <div class="nos-story-pill">
+              <span>🌊</span>
+              <p>Comunicación diaria con familias</p>
+            </div>
+            <div class="nos-story-pill">
+              <span>🌱</span>
+              <p>Entorno seguro y estimulante</p>
+            </div>
+            <div class="nos-story-pill">
+              <span>🤍</span>
+              <p>Vínculo afectivo como base del aprendizaje</p>
+            </div>
+          </div>
+        </div>
+        <div class="nos-story-visual reveal">
+          <div class="nos-story-img" role="img" aria-label="Foto del equipo de la Escuela Infantil Bajo el Mar" style="background: url('assets/nosotros/equipo.webp?v=2') no-repeat center / cover !important;">
+          </div>
+          <div class="nos-story-badge">
+            <strong>+20</strong>
+            <span>años acompañando<br>a las familias<br>de Alalpardo</span>
+          </div>
+          <div class="nos-story-tag">📍 Alalpardo, Madrid</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════
+         VALORES — Grid visual con iconos
+         ═══════════════════════════════════════════ -->
+    <section class="section soft" id="valores">
+      <div class="container">
+        <div class="nos-values-head reveal">
+          <span class="eyebrow">Valores</span>
+          <h2 class="title">Lo que nos hace <em>diferentes</em></h2>
+          <p class="lead" style="margin-top:1rem;max-width:620px">No somos una guardería al uso. Somos un espacio pensado para que los niños crezcan con seguridad emocional, curiosidad y alegría.</p>
+        </div>
+        <div class="nos-values-grid">
+          <article class="nos-value-card reveal" style="--card-accent:var(--teal)">
+            <div class="nos-value-icon" style="background:rgba(20,184,166,.12)">❤️</div>
+            <h3>Calidad afectiva</h3>
+            <p>El vínculo, el cariño y la seguridad emocional son la base del aprendizaje en la etapa 0–3 años. Cada niño necesita sentirse querido para aprender.</p>
+          </article>
+          <article class="nos-value-card reveal" style="--card-accent:var(--coral)">
+            <div class="nos-value-icon" style="background:rgba(255,111,94,.12)">🎓</div>
+            <h3>Profesionalidad</h3>
+            <p>Equipo titulado con experiencia en educación infantil, desarrollo evolutivo y acompañamiento familiar. Formación continua como compromiso.</p>
+          </article>
+          <article class="nos-value-card reveal" style="--card-accent:#FFD85C">
+            <div class="nos-value-icon" style="background:rgba(255,216,92,.18)">💬</div>
+            <h3>Comunicación diaria</h3>
+            <p>La relación familia‑escuela es constante: te contamos cómo ha ido el día, qué ha comido, cómo ha dormido y cómo ha jugado tu hijo.</p>
+          </article>
+          <article class="nos-value-card reveal" style="--card-accent:var(--mid)">
+            <div class="nos-value-icon" style="background:rgba(10,107,138,.12)">🌱</div>
+            <h3>Autonomía</h3>
+            <p>Fomentamos hábitos, rutinas y pequeñas responsabilidades adaptadas a la edad. La autonomía se construye con paciencia, no con prisa.</p>
+          </article>
+          <article class="nos-value-card reveal" style="--card-accent:var(--foam)">
+            <div class="nos-value-icon" style="background:rgba(167,243,208,.22)">🎲</div>
+            <h3>El juego como motor</h3>
+            <p>Juego libre, simbólico, sensorial y dirigido: es la forma natural en que los niños aprenden, experimentan y descubren el mundo.</p>
+          </article>
+          <article class="nos-value-card reveal" style="--card-accent:var(--yellow)">
+            <div class="nos-value-icon" style="background:rgba(255,216,92,.18)">🕐</div>
+            <h3>Conciliación real</h3>
+            <p>Horario amplio de 6:30 a 17:30 y servicios pensados para adaptarse a las necesidades reales de las familias de hoy en día.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+
+
+    <!-- ═══════════════════════════════════════════
+         NUESTRO ENTORNO — Alalpardo
+         ═══════════════════════════════════════════ -->
+    <section class="section soft" id="entorno">
+      <div class="container nos-place-grid">
+        <div class="nos-place-copy reveal">
+          <span class="eyebrow">Dónde estamos</span>
+          <h2 class="title">En el corazón de<br><em>Alalpardo</em></h2>
+          <p class="lead" style="margin-top:1.2rem">Alalpardo es un municipio tranquilo del norte de Madrid ideal para la crianza: calles seguras, aire limpio y comunidad cercana. Un entorno que complementa perfectamente el trabajo que hacemos dentro del aula.</p>
+          <p class="lead" style="margin-top:1rem">Estamos en <strong>Calle Egidos, 7</strong>, con acceso fácil para las familias de Alalpardo, El Molar, Talamanca del Jarama y alrededores.</p>
+          <p class="lead" style="margin-top:1rem">
+            Bajo el Mar está en Calle Egidos, 7, en Alalpardo, una localidad del municipio de Valdeolmos-Alalpardo situada en la zona norte de Madrid. Es un lugar residencial, cercano y familiar, bien conectado con otros pueblos del entorno como Valdeolmos, Fuente el Saz, Algete, Valdetorres y Cobeña.
+          </p>
+          <p class="lead" style="margin-top:1rem">
+            Para muchas familias, la ubicación es especialmente cómoda porque permite una continuidad natural hacia colegios del propio pueblo, como el CEIP Ramón Linacero o el Colegio Árula, además de mantener una rutina diaria más sencilla y cercana durante los primeros años.
+          </p>
+
+          <div class="location-highlights" aria-label="Ventajas de la ubicación" style="margin-top:2rem; display:grid; grid-template-columns:repeat(auto-fit, minmax(200px, 1fr)); gap:1.2rem; margin-bottom:2rem">
+            <div class="location-highlight">
+              <strong style="display:block; color:var(--deep); font-weight:800; font-size:1.05rem; margin-bottom:0.3rem">Entorno de pueblo</strong>
+              <span style="font-size:0.92rem; color:var(--muted); line-height:1.5">Un ambiente más tranquilo, familiar y cercano que ayuda a crear rutinas estables.</span>
+            </div>
+            <div class="location-highlight">
+              <strong style="display:block; color:var(--deep); font-weight:800; font-size:1.05rem; margin-bottom:0.3rem">Zona norte de Madrid</strong>
+              <span style="font-size:0.92rem; color:var(--muted); line-height:1.5">Buena opción para familias de Alalpardo y municipios próximos del entorno.</span>
+            </div>
+            <div class="location-highlight">
+              <strong style="display:block; color:var(--deep); font-weight:800; font-size:1.05rem; margin-bottom:0.3rem">Continuidad educativa</strong>
+              <span style="font-size:0.92rem; color:var(--muted); line-height:1.5">Proximidad a colegios del pueblo para facilitar el paso después de la etapa 0–3.</span>
+            </div>
+            <div class="location-highlight">
+              <strong style="display:block; color:var(--deep); font-weight:800; font-size:1.05rem; margin-bottom:0.3rem">Vida local</strong>
+              <span style="font-size:0.92rem; color:var(--muted); line-height:1.5">Alalpardo destaca por su identidad vecinal, sus tradiciones y su carácter familiar.</span>
+            </div>
+          </div>
+
+          <div style="margin-top:1.8rem;display:flex;gap:1rem;flex-wrap:wrap">
+            <a class="btn btn-secondary" href="instalaciones.html">Ver instalaciones</a>
+            <a class="btn btn-primary" href="contacto.html#mapa">Cómo llegar</a>
+          </div>
+        </div>
+        <div class="nos-place-visual reveal">
+          <div class="nos-place-img" style="display: block; padding: 0;">
+            <iframe
+              title="Mapa de Escuela Infantil Bajo el Mar en Alalpardo"
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"
+              src="https://www.google.com/maps?q=Calle%20Egidos%207%2C%20Alalpardo%2C%20Madrid&output=embed"
+              style="width: 100%; height: 100%; border: 0; min-height: 420px; display: block;">
+            </iframe>
+          </div>
+          <div class="nos-place-tag">
+            <span>🕐 Abierto 6:30 – 17:30</span>
+          </div>
+          <div class="nos-place-tag nos-place-tag--2">
+            <span>📞 620 433 427</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════
+         TESTIMONIOS — Opiniones de familias (Google Reviews)
+         ═══════════════════════════════════════════ -->
+    <section class="section" id="testimonios">
+      <div class="container">
+        
+        <!-- Google Reviews Rating Hub Header -->
+        <div class="google-reviews-hub reveal">
+          <div class="google-reviews-hub-title">
+            <svg viewBox="0 0 24 24" width="24" height="24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l3.66-2.85z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.85c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
+            <span>Opiniones de Google</span>
+          </div>
+          <div class="google-rating-score">4.9</div>
+          <div class="stars-row">
+            <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+          </div>
+          <div class="google-reviews-meta">
+            <span>9 valoraciones reales</span>
+            <span>·</span>
+            <span style="color: var(--teal); font-weight: 700;">Recomendada 100%</span>
+          </div>
+        </div>
+
+        <div class="nos-test-grid-google">
+          
+          <!-- Testimonio 1 -->
+          <article class="google-review-card reveal">
+            <div>
+              <div class="google-review-top">
+                <div class="google-reviewer-profile">
+                  <div class="google-avatar google-avatar-p">P</div>
+                  <div class="google-reviewer-info">
+                    <h4>P. C.</h4>
+                    <span class="google-verified-badge">
+                      <svg viewBox="0 0 24 24" width="12" height="12" fill="currentColor" style="vertical-align: middle;"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                      Familia de Alalpardo
+                    </span>
+                  </div>
+                </div>
+                <div class="google-card-logo">
+                  <svg viewBox="0 0 24 24" width="18" height="18"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l3.66-2.85z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.85c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
+                </div>
+              </div>
+              <div class="google-card-stars">
+                <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+              </div>
+              <p class="google-review-text">"Estamos muy contentos con la escuela infantil. Las chicas son geniales, las instalaciones están muy bien, y la comida es casera. El trato es cercano y aprenden un montón. Recomendada 100%"</p>
+            </div>
+            <span class="google-review-date">Hace 8 meses</span>
+          </article>
+
+          <!-- Testimonio 2 -->
+          <article class="google-review-card reveal">
+            <div>
+              <div class="google-review-top">
+                <div class="google-reviewer-profile">
+                  <div class="google-avatar google-avatar-i">I</div>
+                  <div class="google-reviewer-info">
+                    <h4>I. A. L.</h4>
+                    <span class="google-verified-badge">
+                      <svg viewBox="0 0 24 24" width="12" height="12" fill="currentColor" style="vertical-align: middle;"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                      Familia de Alalpardo
+                    </span>
+                  </div>
+                </div>
+                <div class="google-card-logo">
+                  <svg viewBox="0 0 24 24" width="18" height="18"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l3.66-2.85z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.85c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
+                </div>
+              </div>
+              <div class="google-card-stars">
+                <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+              </div>
+              <p class="google-review-text">"Magníficas profesionales!! Son encantadoras y muy vocacionales!! Estamos súper contentos con la escuela!!!"</p>
+            </div>
+            <span class="google-review-date">Hace 2 años</span>
+          </article>
+
+          <!-- Testimonio 3 -->
+          <article class="google-review-card reveal">
+            <div>
+              <div class="google-review-top">
+                <div class="google-reviewer-profile">
+                  <div class="google-avatar google-avatar-a">A</div>
+                  <div class="google-reviewer-info">
+                    <h4>A. R. A.</h4>
+                    <span class="google-verified-badge">
+                      <svg viewBox="0 0 24 24" width="12" height="12" fill="currentColor" style="vertical-align: middle;"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                      Familia de Alalpardo
+                    </span>
+                  </div>
+                </div>
+                <div class="google-card-logo">
+                  <svg viewBox="0 0 24 24" width="18" height="18"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l3.66-2.85z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.85c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
+                </div>
+              </div>
+              <div class="google-card-stars">
+                <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+              </div>
+              <p class="google-review-text">"Es la mejor guardería del mundo. Las chicas no pueden tenerles más amor a los pequeños. Es el segundo año y estoy súper contenta y tranquila cada vez que dejo a mi hijo allí. Todo muy limpio y comida súper variada y sana."</p>
+            </div>
+            <span class="google-review-date">Hace 2 años</span>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════
+         CTA FINAL
+         ═══════════════════════════════════════════ -->
+    <section class="nos-cta">
+      <div class="nos-cta-bg" aria-hidden="true">
+        <span class="nos-cta-fish">🐠</span>
+        <span class="nos-cta-fish nos-cta-fish--2">🐡</span>
+      </div>
+      <div class="container nos-cta-inner reveal">
+        <span class="eyebrow" style="color:var(--foam)">¿Te unes a nuestra familia?</span>
+        <h2 class="nos-cta-title">El primer paso es<br>conocernos</h2>
+        <p>Ven a visitar el centro, conócenos y descubre si Bajo el Mar es el lugar que estabas buscando para tu hijo.</p>
+        <div class="nos-cta-actions">
+          <a class="btn btn-ghost" href="instalaciones.html">Ver instalaciones</a>
+          <a class="btn btn-primary" href="contacto.html">Solicitar información</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer global -->
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div class="footer-col">
+        <div class="footer-logo">
+          <img src="assets/Logo/logo_bajo_el_mar_transparent.png" alt="Escuela Infantil Bajo el Mar" class="footer-logo-img" style="height: 52px; width: auto; display: block; margin-bottom: 0.5rem;">
+        </div>
+        <p>Escuela Infantil en Alalpardo, Madrid. Cuidado, educación y acompañamiento para niños y niñas de 0 a 3 años.</p>
+        <div class="chips">
+          <span class="chip">CAM autorizada</span>
+          <span class="chip">0–3 años</span>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h3>Web</h3>
+        <a href="nosotros.html">Nosotros</a>
+        <a href="metodologia.html">Metodología</a>
+        <a href="instalaciones.html">Instalaciones</a>
+      </div>
+      <div class="footer-col">
+        <h3>Contacto</h3>
+        <a href="tel:620433427">620 433 427</a>
+        <a href="tel:658621137">658 621 137</a>
+        <a href="mailto:escuelainfantilbajoelmar@hotmail.com">escuelainfantilbajoelmar@hotmail.com</a>
+        <a href="contacto.html#mapa">Calle Egidos, 7 · Alalpardo</a>
+      </div>
+      <div class="footer-col">
+        <h3>Newsletter</h3>
+        <p>Consejos de crianza, novedades del centro y fechas importantes.</p>
+        <form class="newsletter" action="mailto:escuelainfantilbajoelmar@hotmail.com" method="post" enctype="text/plain">
+          <input type="email" name="email" placeholder="Tu email" aria-label="Email newsletter">
+          <button class="btn btn-primary" type="submit">Enviar</button>
+        </form>
+      </div>
+    </div>
+    <div class="container footer-bottom">
+      <span>© 2026 Escuela Infantil Bajo el Mar · Alalpardo, Madrid</span>
+      <span><a href="aviso-legal.html">Aviso legal</a> · <a href="privacidad.html">Privacidad</a></span>
+    </div>
+  </footer>
+
+  <!-- Botones flotantes -->
+  <div class="float-actions" aria-label="Acciones rápidas de contacto">
+    <a class="float-btn whatsapp" href="https://wa.me/34620433427" target="_blank" rel="noopener" aria-label="WhatsApp">✆</a>
+    <a class="float-btn" href="tel:620433427" aria-label="Llamar">☎</a>
+  </div>
+
+  <script src="js/main.js?v=10"></script>
+</body>
+</html>
