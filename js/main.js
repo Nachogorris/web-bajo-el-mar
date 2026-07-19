@@ -182,9 +182,12 @@ document.addEventListener("DOMContentLoaded", () => {
   const updateHero = () => {
     ticking = false;
 
+    const isMobile = window.innerWidth <= 768;
     const rect = hero.getBoundingClientRect();
     const scrollableDistance = Math.max(hero.offsetHeight - window.innerHeight, 1);
-    const progress = clamp(-rect.top / scrollableDistance);
+    
+    let rawProgress = clamp(-rect.top / scrollableDistance);
+    const progress = isMobile ? (0.7 + rawProgress * 0.3) : rawProgress;
 
     /*
       Secuencia creativa:
@@ -196,16 +199,14 @@ document.addEventListener("DOMContentLoaded", () => {
       0.64 - 0.90  aparece el mensaje comercial y CTAs de forma limpia.
     */
     const fishReveal = prefersReducedMotion ? 1 : smoothStep(0.006, 0.060, progress);
-    // Apertura constante: primero aparecen los peces y la puerta empieza casi al instante al hacer clic.
     const doorProgress = prefersReducedMotion ? 1 : clamp((progress - 0.055) / 0.56);
     const worldProgress = prefersReducedMotion ? 1 : smoothStep(0.11, 0.50, progress);
     const introLift = prefersReducedMotion ? 1 : smoothStep(0.39, 0.72, progress);
     const introFade = prefersReducedMotion ? 1 : 1 - smoothStep(0.96, 1.00, progress);
-    const contentProgress = prefersReducedMotion ? 1 : smoothStep(0.68, 0.92, progress);
+    const contentProgress = isMobile ? 1 : (prefersReducedMotion ? 1 : smoothStep(0.68, 0.92, progress));
     const cueProgress = prefersReducedMotion ? 0 : 1 - smoothStep(0.02, 0.16, progress);
     const glowProgress = prefersReducedMotion ? 0 : smoothStep(0.12, 0.36, progress) * (1 - smoothStep(0.84, 0.98, progress));
 
-    const isMobile = window.innerWidth <= 760;
     const translateAmount = isMobile ? 25 : 22;
     const rotateAmount = isMobile ? 58 : 64;
 

@@ -724,17 +724,49 @@
   .home-gate-hero .btn-primary { background: #fff; color: #043D5D; box-shadow: 0 15px 40px rgba(4,61,93,.2); }
   .home-gate-hero .btn-ghost { color: #fff; border-color: rgba(255,255,255,.58); background: rgba(255,255,255,.08); }
 
-  @media (max-width: 760px) {
-    .home-gate-hero { min-height: 218vh; }
-    .hero-intro { top: 52%; width: min(94vw, 640px); }
-    .hero-welcome-panel { border-radius: 30px 30px 42px 42px; padding: 1rem 1.05rem 1.15rem; }
-    .hero-intro-logo { width: min(215px, 55vw); }
-    .hero-intro-title { font-size: clamp(1.85rem, 8.6vw, 3.1rem); }
-    .hero-intro-kicker { font-size: .66rem; letter-spacing: .12em; }
-    .hero-content { top: 73%; width: min(92vw, 620px); }
-    .hero-content::before { height: calc(100% + 1.35rem); border-radius: 26px; }
-    .home-gate-hero .hero-title { font-size: clamp(2rem, 10vw, 3.8rem); }
-    .hero-trust { display: none; }
+  @media (max-width: 768px) {
+    .home-gate-hero {
+      min-height: 120vh !important;
+    }
+    .hero-intro {
+      display: none !important;
+    }
+    .door-panel,
+    .door-shadow,
+    .door-opening-glow {
+      display: none !important;
+    }
+    .underwater-world {
+      opacity: 1 !important;
+      transform: scale(1.05) !important;
+    }
+    .hero-content {
+      top: 48% !important;
+      transform: translate(-50%, -50%) !important;
+      opacity: 1 !important;
+      pointer-events: auto !important;
+      width: min(94vw, 600px) !important;
+    }
+    .hero-content::before {
+      height: calc(100% + 1.25rem) !important;
+      border-radius: 26px !important;
+    }
+    .home-gate-hero .hero-title {
+      font-size: clamp(1.8rem, 8.5vw, 2.7rem) !important;
+      line-height: 1.02 !important;
+      margin-bottom: 0.65rem !important;
+    }
+    .hero-copy {
+      font-size: 0.94rem !important;
+      line-height: 1.48 !important;
+      margin-bottom: 1.3rem !important;
+    }
+    .hero-trust {
+      display: none !important;
+    }
+    .scroll-cue {
+      display: none !important;
+    }
   }
 </style>
 
@@ -3909,7 +3941,7 @@
         </div>
 
         <div class="home-proof-grid" aria-label="Ventajas principales de Bajo el Mar">
-          <article class="proof-card proof-card-photo reveal featured" style="--proof-photo:url('assets/Home/irpf.jpg'), url('../assets/Home/irpf.jpg'), url('../assets/home/becas-ayudas.webp')">
+          <article class="proof-card proof-card-photo reveal featured" style="--proof-photo:url('assets/home/irpf.jpg'), url('../assets/home/irpf.jpg'), url('../assets/home/becas-ayudas.webp')">
             <div class="proof-card-image" aria-hidden="true"></div>
             <div class="proof-card-body">
               <span class="proof-icon">💳</span>
@@ -4154,25 +4186,25 @@
 
         <div class="activity-grid">
           <article class="activity-card reveal">
-            <img src="assets/Home/psicomotricidad.webp?v=2" alt="Clase de Psicomotricidad" class="activity-card-img">
+            <img src="assets/home/psicomotricidad.webp?v=2" alt="Clase de Psicomotricidad" class="activity-card-img">
             <span class="activity-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="13" cy="4.5" r="2.1"/><path d="M10.6 8.2 8.1 11.4l3.3 1.7 1.7 4.9"/><path d="M13.4 9.1 16 11.2l2.9-.2"/><path d="M10.4 17.7 7.3 20"/><path d="M12.4 13.2 15.6 15.5l.6 4.1"/></svg></span>
             <h3>Psicomotricidad</h3>
             <p>Movimiento, equilibrio, coordinación y seguridad corporal en espacios preparados.</p>
           </article>
           <article class="activity-card reveal">
-            <img src="assets/Home/musica.webp?v=2" alt="Clase de Música" class="activity-card-img">
+            <img src="assets/home/musica.webp?v=2" alt="Clase de Música" class="activity-card-img">
             <span class="activity-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M9 18.1a2.6 2.6 0 1 1-1.4-2.3V6.2l10-2v9.9a2.6 2.6 0 1 1-1.4-2.3V7.1L9 8.6z"/></svg></span>
             <h3>Música</h3>
             <p>Ritmo, escucha, expresión y disfrute a través de propuestas musicales adaptadas.</p>
           </article>
           <article class="activity-card reveal">
-            <img src="assets/Home/ingles.webp?v=5" alt="Clase de Inglés" class="activity-card-img" style="object-fit: contain; background: #ffffff;">
+            <img src="assets/home/ingles.webp?v=5" alt="Clase de Inglés" class="activity-card-img" style="object-fit: contain; background: #ffffff;">
             <span class="activity-icon activity-icon-text" aria-hidden="true">EN</span>
             <h3>Inglés Kids&Us</h3>
             <p>Clases de inglés en el propio centro, introduciendo el idioma de forma natural.</p>
           </article>
           <article class="activity-card reveal">
-            <img src="assets/Home/salidas.webp?v=2" alt="Salidas al exterior y entorno cercano" class="activity-card-img">
+            <img src="assets/home/salidas.webp?v=2" alt="Salidas al exterior y entorno cercano" class="activity-card-img">
             <span class="activity-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg></span>
             <h3>Salidas al exterior</h3>
             <p>Salidas al entorno cercano para desarrollar la autonomía en el exterior, aprendiendo y asociando conceptos fuera de la escuela.</p>
