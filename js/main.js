@@ -268,21 +268,24 @@ document.addEventListener("DOMContentLoaded", () => {
       const throughDoorX = lerp(onDoorX, entryX, entryProgress);
       const throughDoorY = lerp(onDoorY, entryY, entryProgress);
 
-      // Movimiento orgánico muy suave y breve (dampened)
-      const freqX = isMobile ? 0.6 : 2.5;
-      const freqY = isMobile ? 0.5 : 2.0;
-      const ampX = isMobile ? 0.08 : 0.45;
-      const ampY = isMobile ? 0.06 : 0.35;
+      // Movimiento orgánico ultra suave y breve (dampened)
+      const freqX = isMobile ? 0.3 : 1.2;
+      const freqY = isMobile ? 0.2 : 0.9;
+      const ampX = isMobile ? 0.03 : 0.18;
+      const ampY = isMobile ? 0.02 : 0.14;
 
-      const floatX = Math.sin((progress * freqX + delay * 41) * Math.PI) * (0.2 + spreadProgress * ampX);
-      const floatY = Math.cos((progress * freqY + delay * 31) * Math.PI) * (0.2 + spreadProgress * ampY);
+      const floatX = Math.sin((progress * freqX + delay * 41) * Math.PI) * (0.15 + spreadProgress * ampX);
+      const floatY = Math.cos((progress * freqY + delay * 31) * Math.PI) * (0.15 + spreadProgress * ampY);
 
-      const x = lerp(throughDoorX, endX, spreadProgress) + floatX;
-      const y = lerp(throughDoorY, endY, spreadProgress) + floatY;
+      // Los peces viajan una distancia mucho más corta y despacio
+      const travelDamp = isMobile ? 0.15 : 0.35;
+      const x = lerp(throughDoorX, endX, spreadProgress * travelDamp) + floatX;
+      const y = lerp(throughDoorY, endY, spreadProgress * travelDamp) + floatY;
 
-      const fishAngleFreq = isMobile ? 0.4 : 2.0;
-      const angle = lerp(lerp(rot * 0.15, rot + sideDirection * -4, entryProgress), endRot, spreadProgress) + Math.sin(progress * fishAngleFreq + delay * 9) * (isMobile ? 0.4 : 1.8) * spreadProgress;
-      const fishScale = lerp(scale * (0.72 + entryProgress * 0.24), endScale, spreadProgress);
+      const fishAngleFreq = isMobile ? 0.2 : 0.8;
+      const angleAmp = isMobile ? 0.15 : 0.6;
+      const angle = lerp(lerp(rot * 0.15, rot + sideDirection * -4, entryProgress), endRot, spreadProgress * travelDamp) + Math.sin(progress * fishAngleFreq + delay * 9) * angleAmp * spreadProgress;
+      const fishScale = lerp(scale * (0.72 + entryProgress * 0.24), endScale, spreadProgress * travelDamp);
       const opacity = clamp(fishReveal * lateFade * (0.58 + entryProgress * 0.20 + spreadProgress * 0.22));
 
       el.style.opacity = String(opacity.toFixed(3));
